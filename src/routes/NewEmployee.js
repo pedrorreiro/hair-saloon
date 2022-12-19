@@ -57,7 +57,7 @@ export function NewEmployee() {
     }, [])
 
     return (
-        <div>
+        <Style>
             <h1>Novo Funcionário</h1>
 
             <Form onFinish={handleSubmit}>
@@ -90,7 +90,7 @@ export function NewEmployee() {
 
 
             </Form>
-        </div >
+        </Style >
     );
 }
 
