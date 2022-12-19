@@ -3,7 +3,7 @@ import { colors } from "../../utils";
 
 export const MenuContainer = styled.div`
     display: ${props => props.isVisible ? "block" : "none"};
-    padding: 50px 20px;
+    padding: 30px 20px;
     box-sizing: border-box;
     height: 100vh;
     text-align: center;

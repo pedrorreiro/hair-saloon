@@ -14,8 +14,9 @@ const Style = styled.div`
     width: 100%;
     display: flex;
 
-    >div{
+    >div:nth-child(2){
         padding: 20px;
+        width: 100%;
     }
 
     h1{

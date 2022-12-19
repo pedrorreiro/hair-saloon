@@ -1,3 +1,5 @@
+import ModalComponent from './components/Modal/ModalComponent'
+
 const colors = {
     primary: '#02212A',
     secondary: '#00141A',
@@ -24,12 +26,12 @@ const menuOptions = {
     },
     "Funcionários": {
         show: true,
-        route: "/funcionarios",
+        route: "/employees",
         icon: require('./assets/img/icons/funcionarios.png'),
     },
     "Serviços": {
         show: true,
-        route: "/servicos",
+        route: "/services",
         icon: require('./assets/img/icons/servicos.png'),
     },
     "Sair": {
@@ -39,8 +41,115 @@ const menuOptions = {
     }
 }
 
+const serviceTableColumns = [
+    {
+        title: 'Serviço',
+        dataIndex: 'service',
+        key: 'service',
+    },
+    {
+        title: 'Preço',
+        dataIndex: 'price',
+        key: 'price',
+    },
+    {
+        title: 'Comissão/Funcionário',
+        dataIndex: 'commission',
+        key: 'commission',
+    },
+    {
+        title: 'Duração Estimada',
+        dataIndex: 'duration',
+        key: 'duration',
+    },
+    {
+        title: 'Editar',
+        dataIndex: 'edit',
+        key: 'edit',
+    },
+    {
+        title: 'Excluir',
+        dataIndex: 'delete',
+        key: 'delete',
+    },
+    {
+        title: 'Funcionários',
+        dataIndex: 'employees',
+        key: 'employees',
+    }
+]
+
+const employeesTableColumns = [
+    {
+        title: 'Nome',
+        dataIndex: 'name',
+        key: 'name',
+    },
+    {
+        title: "Ganhos Mensais",
+        dataIndex: 'monthlyEarnings',
+        key: 'monthlyEarnings',
+    },
+    {
+        title: 'Editar',
+        dataIndex: 'edit',
+        key: 'edit',
+    },
+    {
+        title: 'Excluir',
+        dataIndex: 'delete',
+        key: 'delete',
+    }
+]
+
+const serviceTableMockData = [
+    {
+        key: '1',
+        service: 'Corte',
+        price: 'R$ 30,00',
+        commission: '40%',
+        duration: '30 minutos',
+        edit: <img src={require('./assets/img/icons/edit.png')} alt="edit" />,
+        delete: <img src={require('./assets/img/icons/trash.png')} alt="delete" />,
+        employees: <img src={require('./assets/img/icons/employees.png')} alt="list" />,
+    },
+    {
+        key: '2',
+        service: 'Barba',
+        price: 'R$ 20,00',
+        commission: '40%',
+        duration: '20 minutos',
+        edit: <img src={require('./assets/img/icons/edit.png')} alt="edit" />,
+        delete: <img src={require('./assets/img/icons/trash.png')} alt="delete" />,
+        employees: <img src={require('./assets/img/icons/employees.png')} alt="list" />,
+    }
+]
+
+const employeesTableMockData = [
+    {
+        key: '1',
+        name: 'João',
+        monthlyEarnings: 'R$ 1.000,00',
+        // edit: <img src={require('./assets/img/icons/edit.png')} alt="edit" />,
+        edit: <ModalComponent type={"edit"} data={{ name: 'João' }} />,
+        delete: <img src={require('./assets/img/icons/trash.png')} alt="delete" />,
+    },
+    {
+        key: '2',
+        name: 'Maria',
+        monthlyEarnings: 'R$ 1.000,00',
+        // edit: <img src={require('./assets/img/icons/edit.png')} alt="edit" />,
+        edit: <ModalComponent type={"edit"} data={{ name: 'Maria' }} />,
+        delete: <img src={require('./assets/img/icons/trash.png')} alt="delete" />,
+    }
+]
+
 export {
     colors,
-    menuOptions
+    menuOptions,
+    serviceTableColumns,
+    serviceTableMockData,
+    employeesTableColumns,
+    employeesTableMockData,
 }
 
