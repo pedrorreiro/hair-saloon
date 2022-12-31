@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let myApi = axios.create({
-    baseURL: 'http://localhost:8080/',
+    baseURL: 'https://saloon.herokuapp.com/',
 });
 
 const api = {
