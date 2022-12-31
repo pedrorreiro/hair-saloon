@@ -7,9 +7,9 @@ a{
     display: flex;
     flex-direction: row;
     align-items: center;
-    min-width: 220px;
-    padding: 20px 20px;
-    font-size: 1em;
+    min-width: 200px;
+    padding: 15px 20px;
+    font-size: .9em;
     font-weight: 400;
     gap: 10px;
     color: ${colors.white};

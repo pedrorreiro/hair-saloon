@@ -1,6 +1,7 @@
 import { Spin } from "antd";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { bdLogin } from "../../actions";
 import { AuthContext } from "../../App";
 import { login } from "../../firebase/auth";
 import { colors } from "../../utils";
@@ -22,16 +23,17 @@ export default function Login() {
 
         e.preventDefault();
 
-        const user = await login(email, password);
-
-        if (typeof user === "string") {
-            errors.error(user);
-        }
-
-        else if (user) {
+        try {
+            await bdLogin(email);
+            const user = await login(email, password);
             console.log("User logged in");
+            console.log(user);
             navigate("/")
         }
+        catch (error) {
+            errors.error(error.message);
+        }
+
 
         setLoading(false);
     }

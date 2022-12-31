@@ -14,8 +14,8 @@ export const StyleEmployees = styled.div`
         margin-top: 20px;
 
         img{
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
         }
 
         img:hover{
@@ -27,7 +27,6 @@ export const StyleEmployees = styled.div`
             color: ${colors.white};
         }
 
-        
         border-radius: 6px;
 
         -webkit-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.4);

@@ -1,25 +1,37 @@
 import axios from 'axios';
 
 let myApi = axios.create({
-    baseURL: 'https://hair-saloon.glitch.me/',
+    baseURL: 'http://localhost:8080/',
 });
 
 const api = {
+    login: (email) => {
+        return myApi.post('/user/login', {
+            email: email
+        });
+    },
     getUsers: () => {
         return myApi.get('/user');
     },
-    getSaloons: () => {
-        return myApi.get('/saloon');
+    getUserByEmail: (email) => {
+        return myApi.get(`/user/email/${email}`);
     },
-    newUser: (user) => {
-        return myApi.post('/users', user);
+    userIsFuncionary: async (userId) => {
+        const funcionary = await myApi.get(`/functionary/user/${userId}`);
+        return !!funcionary.data;
     },
-    newEmployee: (employee) => {
-        return myApi.post('/employee', employee);
+    getMySaloon: async (userId) => {
+        const saloon = await myApi.get(`/saloon/owner/${userId}`);
+        return saloon.data;
     },
-    getEmployeeSaloons: (employeeId) => {
-        return myApi.get(`/employee/${employeeId}/saloons`);
+    getFunctionaries: async (saloonId) => {
+        const funcionaries = await myApi.get(`/functionary/saloon/${saloonId}`);
+        return funcionaries.data;
     },
+    getFuncionaryByUserId: async (userId) => {
+        const funcionary = await myApi.get(`/functionary/user/${userId}`);
+        return funcionary.data;
+    }
 
 }
 

@@ -1,33 +1,25 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getError } from "../utils";
 import { app } from "./firebase";
 
 export const login = async (email, password) => {
     const auth = getAuth(app);
+    let user = undefined;
 
-    return signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            console.log(user);
-            return user;
-            // ...
-        })
-        .catch((error) => {
-            console.log(error);
+    try {
+        const firebaseUser = await signInWithEmailAndPassword(auth, email, password)
+        user = firebaseUser.user;
+    }
 
-            const errorCode = error.code;
+    catch (error) {
+        const errorCode = error.code || error.response.data.message;
+        throw new Error(getError(errorCode))
+    }
 
-            if (errorCode === "auth/wrong-password") {
-                return "Senha incorreta!";
-            }
-
-            if (errorCode === "auth/user-not-found") {
-                return "Usuário não encontrado!";
-            }
-
-
-        });
+    return user;
 }
+
+
 
 export const getAuthentication = () => {
     return getAuth(app);
@@ -37,6 +29,7 @@ export const logout = () => {
     const auth = getAuth(app);
     auth.signOut().then(() => {
         console.log("User logged out")
+        sessionStorage.setItem("saloon_id", null);
     }).catch((error) => {
         // An error happened.
     });

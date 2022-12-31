@@ -140,11 +140,48 @@ const employeesTableMockData = [
         monthlyEarnings: 'R$ 1.000,00',
         // edit: <img src={require('./assets/img/icons/edit.png')} alt="edit" />,
         edit: <ModalComponent type={"edit"} data={{ name: 'Maria' }} />,
-        delete: <img src={require('./assets/img/icons/trash.png')} alt="delete" />,
+        delete: <img src={require('./assets/img/icons/trash.png')} />,
     }
 ]
 
+const firebaseErrors = [
+    {
+        code: "auth/invalid-email",
+        message: "O e-mail digitado é inválido."
+    },
+    {
+        code: "auth/user-disabled",
+        message: "O usuário foi desabilitado."
+    },
+    {
+        code: "auth/user-not-found",
+        message: "O usuário não foi encontrado."
+    },
+    {
+        code: "auth/wrong-password",
+        message: "A senha digitada é inválida."
+    },
+    {
+        code: "auth/email-already-in-use",
+        message: "O e-mail digitado já está em uso."
+    },
+    {
+        code: "auth/weak-password",
+        message: "A senha digitada é muito fraca."
+    },
+    {
+        code: "auth/operation-not-allowed",
+        message: "Operação não permitida."
+    }
+]
+
+const getError = (code) => {
+    let error = firebaseErrors.find(error => error.code === code);
+    return error ? error.message : "Erro desconhecido";
+}
+
 export {
+    getError,
     colors,
     menuOptions,
     serviceTableColumns,
