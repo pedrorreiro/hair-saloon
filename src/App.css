@@ -19,3 +19,7 @@ html {
   font-family: "Poppings-Light";
   src: url("./assets/fonts/Poppins-Light.otf");
 }
+
+svg:hover {
+  cursor: pointer;
+}

@@ -1,7 +1,10 @@
+import { mdiDelete } from '@mdi/js';
+import Icon from '@mdi/react';
 import { Table } from "antd";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import api from "../../api";
 import ModalComponent from "../../components/Modal/ModalComponent";
+import { SaloonContext } from "../../Contexts/SaloonContext";
 import { employeesTableColumns } from "../../utils";
 import { StyleEmployees } from "./style";
 
@@ -10,37 +13,45 @@ export default function Employees() {
     const [functionaries, setFunctionaries] = useState([]);
     const [dataSource, setDataSource] = useState([]);
 
+    const [saloonId, setSaloonId] = useContext(SaloonContext);
+
+    const getFunctionaries = async () => {
+        const functionaries = await api.getFunctionaries(saloonId);
+        setFunctionaries(functionaries);
+    }
+
     useEffect(() => {
         document.title = "Funcionários";
 
-        const getFunctionaries = async () => {
-            let saloonId = parseInt(sessionStorage.getItem("saloon_id"));
-            const functionaries = await api.getFunctionaries(saloonId);
-            console.log(functionaries);
-            setFunctionaries(functionaries);
+        if (saloonId) getFunctionaries();
+
+        if (saloonId && functionaries) {
 
             const tableData = functionaries.map(f => {
                 return {
                     key: f.key,
-                    name: f.user.name,
+                    name: f.name,
                     monthlyEarnings: "R$ 0,00",
-                    edit: <ModalComponent type={"edit"} data={{ name: f.user.name }} />,
-                    delete: <img src={require('../../assets/img/icons/trash.png')} alt="delete" />,
+                    edit: <ModalComponent type={"editFuncionary"} data={f} update={getFunctionaries} />,
+                    delete: <Icon path={mdiDelete} size={1} alt="delete" />,
                 }
             })
 
             setDataSource(tableData);
+
         }
 
-        getFunctionaries();
-
-    }, [])
+    }, [saloonId, functionaries])
 
     return (
         <StyleEmployees>
             <h1>Funcionários</h1>
 
-            <Table columns={employeesTableColumns} dataSource={dataSource} />
+            <div>
+                <ModalComponent type={"addFunctionary"} update={getFunctionaries} />
+                <Table columns={employeesTableColumns} dataSource={dataSource} />
+            </div>
+
         </StyleEmployees>
     );
 }

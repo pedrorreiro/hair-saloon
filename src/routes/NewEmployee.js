@@ -42,13 +42,11 @@ export function NewEmployee() {
         async function getUsers() {
             const { data } = await api.getUsers();
             setUsers(data);
-            console.log(data);
         }
 
         async function getSaloons() {
             const { data } = await api.getSaloons();
-            setSaloons(data);
-            console.log(data);
+            setSaloons(data);;
         }
 
         getUsers();

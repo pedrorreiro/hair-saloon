@@ -1,50 +1,52 @@
 import { useContext, useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
 import styled from "styled-components";
 import api from "../api";
 import { AuthContext } from "../App";
+import { SaloonContext } from "../Contexts/SaloonContext";
 
 
 export function Home() {
 
     const [errors] = useContext(AuthContext);
+    const [saloon, setSaloon] = useState(null);
 
-    const { user } = useOutletContext();
-
-    const [userData, setUserData] = useState({});
-    const [funcionary, setFuncionary] = useState({});
+    const [saloonId, setSaloonId] = useContext(SaloonContext);
 
     useEffect(() => {
         document.title = "Home ";
-        const checkIfIsFuncionary = async () => {
-            const isFuncionary = await api.userIsFuncionary(1);
-            isFuncionary ? errors.success("É funcionário") : errors.error("Não é funcionário");
-        }
+        const getSaloon = async () => {
+            const data = await api.getSaloonById(saloonId);
 
-        const getUserData = async () => {
-            const u = await (await api.getUserByEmail(user.email)).data
+            setSaloon(data);
+        };
 
-            console.log(u);
-
-            setUserData(u);
-            const func = await api.getFuncionaryByUserId(u.id);
-            setFuncionary(func);
-            console.log(func)
-            sessionStorage.setItem("saloon_id", func.saloon.key);
-        }
-
-        getUserData();
+        if (saloonId) getSaloon();
 
         // checkIfIsFuncionary();
-    }, [errors])
+    }, [errors, saloonId])
 
     return (
         <Style>
-            <h1>{funcionary?.saloon?.name}</h1>
+            {
+                saloonId !== null ? (
+                    <div>
+                        <h1>{saloon?.name}</h1>
+                    </div>
+
+                ) : (
+                    <h1 className="noSaloon">Você não está alocado em nenhum salão</h1>
+                )
+            }
+
         </Style >
     );
 }
 
 const Style = styled.div`
     width: 100%;
+
+    .noSaloon{
+        font-weight: bold;
+        color: red;
+    }
 `

@@ -28,5 +28,6 @@ img{
 
 :not(.active):hover{
     background-color: ${colors.hover};
+    border-radius: 4px;
 }
 `

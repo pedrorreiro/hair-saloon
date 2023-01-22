@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let myApi = axios.create({
-    baseURL: 'https://saloon.herokuapp.com/',
+    baseURL: 'http://localhost:8080/',
 });
 
 const api = {
@@ -20,8 +20,18 @@ const api = {
         const funcionary = await myApi.get(`/functionary/user/${userId}`);
         return !!funcionary.data;
     },
-    getMySaloon: async (userId) => {
-        const saloon = await myApi.get(`/saloon/owner/${userId}`);
+
+    addAgendamento: async (agendamento) => {
+        return myApi.post(`/agendamento`, agendamento);
+    },
+
+    getAgendamentos: async (saloonId) => {
+        const agendamentos = await myApi.get(`/agendamento/saloon/${saloonId}`);
+        return agendamentos.data;
+    },
+
+    getSaloonById: async (id) => {
+        const saloon = await myApi.get(`/saloon/${id}`);
         return saloon.data;
     },
     getFunctionaries: async (saloonId) => {
@@ -31,6 +41,21 @@ const api = {
     getFuncionaryByUserId: async (userId) => {
         const funcionary = await myApi.get(`/functionary/user/${userId}`);
         return funcionary.data;
+    },
+    getServiceById: async (id) => {
+        const service = await myApi.get(`/service/${id}`);
+        return service.data;
+    },
+    getServicesBySaloon: async (saloonId) => {
+        const services = await myApi.get(`/service/saloon/${saloonId}`);
+        return services.data;
+    },
+    getServicesByFuncionary: async (funcionaryId) => {
+        const services = await myApi.get(`/service/functionary/${funcionaryId}`);
+        return services.data;
+    },
+    addFunctionary: async (functionary) => {
+        return myApi.post(`/functionary`, functionary);
     }
 
 }

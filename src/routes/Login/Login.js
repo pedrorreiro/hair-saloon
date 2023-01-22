@@ -27,7 +27,7 @@ export default function Login() {
             await bdLogin(email);
             const user = await login(email, password);
             console.log("User logged in");
-            console.log(user);
+
             navigate("/")
         }
         catch (error) {
@@ -40,12 +40,26 @@ export default function Login() {
 
     return (
         <LoginContainer>
-            <h1>Login</h1>
-            <form onSubmit={handleLogin}>
-                <input type="text" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} />
-                {loading ? <Spin className="loading" style={{ color: colors.yellow }} /> : <input type="submit" value={"Entrar"} />}
-            </form>
+
+            <div id="img">
+
+            </div>
+            <div id="form-div">
+                <div id="login"><h1>Login</h1></div>
+                <form onSubmit={handleLogin}>
+                    <h2>Login</h2>
+                    <input type="text" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    {loading ? <Spin className="loading" style={{ color: colors.yellow }} /> : <input type="submit" value={"Entrar"} />}
+
+                    <div id="more">
+                        <span>Ainda não tem uma conta? <span>Sign up</span></span>
+                    </div>
+                </form>
+            </div>
+
+
+
 
         </LoginContainer>
     )

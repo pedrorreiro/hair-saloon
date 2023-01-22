@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import logo from "../../assets/img/icons/tesoura.png";
+import { SaloonContext } from "../../Contexts/SaloonContext";
 import { logout } from "../../firebase/auth";
 import { menuOptions } from "../../utils";
 import MenuOption from "../MenuOption/MenuOption";
@@ -11,6 +13,8 @@ export default function Menu() {
 
     const isVisible = location.pathname !== "/login";
 
+    const [saloon, setSaloon] = useContext(SaloonContext);
+
     return (
         <MenuContainer isVisible={isVisible}>
             <div className="logo">
@@ -19,14 +23,23 @@ export default function Menu() {
             </div>
 
             <div id="menu-options">
-                {Object.keys(menuOptions).map((option) => (
-                    menuOptions[option].show ?
-                        <MenuOption key={option} data={{
-                            ...menuOptions[option],
-                            text: option
-                        }
-                        }
-                        /> : null)
+                {Object.keys(menuOptions).map((option) => {
+
+                    if (!saloon) {
+                        if (option !== "Home") return null
+                    }
+
+                    return (
+
+                        menuOptions[option].show
+                            ?
+                            <MenuOption key={option} data={{
+                                ...menuOptions[option],
+                                text: option
+                            }
+                            }
+                            /> : null)
+                }
                 )}
             </div>
 

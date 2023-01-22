@@ -1,9 +1,10 @@
 import ModalComponent from './components/Modal/ModalComponent'
 
 const colors = {
-    primary: '#02212A',
-    secondary: '#00141A',
-    hover: '#01181F',
+    primary: '#0F3729',
+    secondary: '#365942',
+    hover: '#14291B',
+    lightGray: '#E8EAE0',
     white: '#FFFFFF',
     yellow: '#ffcc30',
 }

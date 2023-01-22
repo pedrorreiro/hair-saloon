@@ -8,7 +8,6 @@ export const StyleEmployees = styled.div`
 
     table{
 
-        max-width: 90%;
         margin: auto;
 
         margin-top: 20px;
@@ -33,4 +32,26 @@ export const StyleEmployees = styled.div`
         -moz-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.4);
         box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.4);
     }
+
+    > div{
+
+        max-width: 90%;
+        margin: auto;
+        text-align: right;
+
+        button{
+            background-color: ${colors.primary};
+            color: ${colors.white};
+            padding: 20px 20px;
+            display: inline-flex;
+            align-items: center;
+
+            &:hover{
+                cursor: pointer;
+                color: ${colors.white};
+            }
+        }
+    }
+
+    
 `
