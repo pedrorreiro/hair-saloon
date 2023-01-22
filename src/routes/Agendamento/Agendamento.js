@@ -38,8 +38,7 @@ export default function Agendamento() {
     }, [agendamentos])
 
     useEffect(() => {
-        document.title = "Funcionários";
-
+        document.title = "Agendamentos";
         if (saloonId && agendamentos.length === 0) getAgendamentos();
 
     }, [saloonId])
@@ -70,8 +69,7 @@ export default function Agendamento() {
     return (
         <AgendamentoStyle>
             <h1>Agendamentos</h1>
-            {agendamentos.length}
-            {dataSource.length > 0 && <Calendar dateCellRender={dateCallRender} monthCellRender={monthCellRender} />}
+            {dataSource.length > 0 ? <Calendar dateCellRender={dateCallRender} monthCellRender={monthCellRender} /> : <p>Nenhum agendamento encontrado</p>}
 
             <div>
                 <ModalComponent type={"addAgendamento"} update={getAgendamentos} />

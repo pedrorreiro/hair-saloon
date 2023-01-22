@@ -7,8 +7,8 @@ a{
     display: flex;
     flex-direction: row;
     align-items: center;
-    min-width: 200px;
     padding: 15px 20px;
+    padding-right: 35px;
     font-size: .9em;
     font-weight: 400;
     gap: 10px;

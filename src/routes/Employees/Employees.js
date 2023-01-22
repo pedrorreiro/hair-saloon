@@ -18,6 +18,18 @@ export default function Employees() {
     const getFunctionaries = async () => {
         const functionaries = await api.getFunctionaries(saloonId);
         setFunctionaries(functionaries);
+
+        const tableData = functionaries.map(f => {
+            return {
+                key: f.key,
+                name: f.name,
+                monthlyEarnings: "R$ 0,00",
+                edit: <ModalComponent type={"editFuncionary"} data={f} update={getFunctionaries} />,
+                delete: <Icon path={mdiDelete} size={1} alt="delete" />,
+            }
+        })
+
+        setDataSource(tableData);
     }
 
     useEffect(() => {
@@ -25,23 +37,7 @@ export default function Employees() {
 
         if (saloonId) getFunctionaries();
 
-        if (saloonId && functionaries) {
-
-            const tableData = functionaries.map(f => {
-                return {
-                    key: f.key,
-                    name: f.name,
-                    monthlyEarnings: "R$ 0,00",
-                    edit: <ModalComponent type={"editFuncionary"} data={f} update={getFunctionaries} />,
-                    delete: <Icon path={mdiDelete} size={1} alt="delete" />,
-                }
-            })
-
-            setDataSource(tableData);
-
-        }
-
-    }, [saloonId, functionaries])
+    }, [saloonId])
 
     return (
         <StyleEmployees>
